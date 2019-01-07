@@ -12,6 +12,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
+
 /**
  * Created by weiyuhang on 2019/1/7.
  */
@@ -22,12 +25,12 @@ public class AuthFilter extends ZuulFilter{
 
     @Override
     public String filterType() {
-        return null;
+        return PRE_TYPE;
     }
 
     @Override
     public int filterOrder() {
-        return 0;
+        return PRE_DECORATION_FILTER_ORDER - 1;
     }
 
     @Override
