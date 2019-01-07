@@ -47,14 +47,14 @@ public class AuthFilter extends ZuulFilter{
          */
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
-        if("/order/create".equals(request.getRequestURI())){
+        if("/order/order/create".equals(request.getRequestURI())){
             Cookie cookie = CookieUtil.get(request,"openid");
             if(cookie == null || StringUtils.isEmpty(cookie.getValue())){
                 requestContext.setSendZuulResponse(false);
                 requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
             }
         }
-        if("/order/finish".equals(request.getRequestURI())){
+        if("/order/order/finish".equals(request.getRequestURI())){
             Cookie cookie = CookieUtil.get(request,"token");
             if(cookie == null || StringUtils.isEmpty(cookie.getValue()) ||
                     StringUtils.isEmpty(stringRedisTemplate.opsForValue().get(String.format(RedisConstant.TOKEN_TEMPLATE,cookie.getVersion())))){
